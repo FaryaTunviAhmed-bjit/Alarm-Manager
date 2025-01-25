@@ -1,65 +1,63 @@
 package com.bjit.alarmmanager;
 
-package com.bjit.alarmmanager
-
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Test
-import org.junit.Assert.*
+import org.junit.Test;
 
-class MainActivityTest {
+public class MainActivityTest {
 
     @Test
-    fun createNewAlarm_addsAlarmToList() {
-        val activity = MainActivity()
-        activity.createNewAlarm(8, 30)
-        assertEquals(1, activity.alarms.size)
-        assertEquals(8, activity.alarms[0].hour)
-        assertEquals(30, activity.alarms[0].minute)
+    public void createNewAlarm_addsAlarmToList() {
+        MainActivity activity = new MainActivity();
+        activity.createNewAlarm(8, 30);
+        assertEquals(1, activity.getAlarms().size());
+        assertEquals(8, activity.getAlarms().get(0).getHour());
+        assertEquals(30, activity.getAlarms().get(0).getMinute());
     }
 
     @Test
-    fun editAlarm_updatesAlarmTime() {
-        val activity = MainActivity()
-        val alarm = Alarm(1, 7, 45, true)
-        activity.alarms.add(alarm)
-        activity.editAlarm(alarm, 9, 15)
-        assertEquals(9, alarm.hour)
-        assertEquals(15, alarm.minute)
+    public void editAlarm_updatesAlarmTime() {
+        MainActivity activity = new MainActivity();
+        Alarm alarm = new Alarm(1, 7, 45, true);
+        activity.getAlarms().add(alarm);
+        activity.editAlarm(alarm, 9, 15);
+        assertEquals(9, alarm.getHour());
+        assertEquals(15, alarm.getMinute());
     }
 
     @Test
-    fun deleteAlarm_removesAlarmFromList() {
-        val activity = MainActivity()
-        val alarm = Alarm(1, 7, 45, true)
-        activity.alarms.add(alarm)
-        activity.deleteAlarm(alarm)
-        assertTrue(activity.alarms.isEmpty())
+    public void deleteAlarm_removesAlarmFromList() {
+        MainActivity activity = new MainActivity();
+        Alarm alarm = new Alarm(1, 7, 45, true);
+        activity.getAlarms().add(alarm);
+        activity.deleteAlarm(alarm);
+        assertTrue(activity.getAlarms().isEmpty());
     }
 
     @Test
-    fun createNewAlarm_doesNotAddAlarmWhenCancelled() {
-        val activity = MainActivity()
-        activity.createNewAlarm(8, 30, false)
-        assertTrue(activity.alarms.isEmpty())
+    public void createNewAlarm_doesNotAddAlarmWhenCancelled() {
+        MainActivity activity = new MainActivity();
+        activity.createNewAlarm(8, 30, false);
+        assertTrue(activity.getAlarms().isEmpty());
     }
 
     @Test
-    fun editAlarm_doesNotUpdateAlarmWhenCancelled() {
-        val activity = MainActivity()
-        val alarm = Alarm(1, 7, 45, true)
-        activity.alarms.add(alarm)
-        activity.editAlarm(alarm, 9, 15, false)
-        assertEquals(7, alarm.hour)
-        assertEquals(45, alarm.minute)
+    public void editAlarm_doesNotUpdateAlarmWhenCancelled() {
+        MainActivity activity = new MainActivity();
+        Alarm alarm = new Alarm(1, 7, 45, true);
+        activity.getAlarms().add(alarm);
+        activity.editAlarm(alarm, 9, 15, false);
+        assertEquals(7, alarm.getHour());
+        assertEquals(45, alarm.getMinute());
     }
 
     @Test
-    fun deleteAlarm_doesNotRemoveAlarmWhenCancelled() {
-        val activity = MainActivity()
-        val alarm = Alarm(1, 7, 45, true)
-        activity.alarms.add(alarm)
-        activity.deleteAlarm(alarm, false)
-        assertEquals(1, activity.alarms.size)
+    public void deleteAlarm_doesNotRemoveAlarmWhenCancelled() {
+        MainActivity activity = new MainActivity();
+        Alarm alarm = new Alarm(1, 7, 45, true);
+        activity.getAlarms().add(alarm);
+        activity.deleteAlarm(alarm, false);
+        assertEquals(1, activity.getAlarms().size());
     }
 }
